@@ -1,0 +1,15 @@
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    margin: 50px;
+}
+
+h1 {
+    padding: 1rem;
+    border: 1px solid black;
+    background-color: antiquewhite;
+    color: blueviolet;
+}
