@@ -4,48 +4,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FORM</title>
+    <title>Registration Form</title>
     <link rel="stylesheet" href="./form.css">
 </head>
 
 <body>
     <form onsubmit="handleSubmit(event)" action="./thank.html" method="GET">
-        <div>
-            <label>Name:</label>
-            <input type=text name="name" placeholder="Please type here..." required>
+        <h1>Registration Form</h1>
+        <div class="form-group">
+            <label for="name">Full Name:</label>
+            <input id="name" type="text" name="name" placeholder="Enter your full name" required>
         </div>
-        <div>
-            <label>Email:</label>
-            <input type=email name="email" placeholder="Please type here..." required>
+        <div class="form-group">
+            <label for="email">Email Address:</label>
+            <input id="email" type="email" name="email" placeholder="Enter your email address" required>
         </div>
-        <div>
-            <label>Password:</label>
-            <input type=password name="password" placeholder="Please type here..." required>
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input id="password" type="password" name="password" placeholder="Enter a strong password" required>
         </div>
-        <div>
-            <label>Profession:</label>
-            <select onchange="handleSelectProfession(event)">
-                <option value="NA">---choose---</option>
+        <div class="form-group">
+            <label for="profession">Profession:</label>
+            <select id="profession" onchange="handleSelectProfession(event)" required>
+                <option value="NA">---Choose Profession---</option>
                 <option value="std">Student</option>
                 <option value="emp">Employee in Tech</option>
                 <option value="bsn">Business</option>
             </select>
         </div>
-        <div>
-            <label>GST Number:</label>
-            <input type=text name="gst-number" placeholder="Please type here..." required disabled>
+        <div class="form-group">
+            <label for="gst-number">GST Number (if applicable):</label>
+            <input id="gst-number" type="text" name="gst-number" placeholder="Enter GST number" disabled>
         </div>
-        <div>
-            <label>Employee Email:</label>
-            <input type=email name="emp-email" placeholder="Please type here..." required disabled>
+        <div class="form-group">
+            <label for="emp-email">Work Email:</label>
+            <input id="emp-email" type="email" name="emp-email" placeholder="Enter work email" disabled>
         </div>
-        <div>
-            <label>College Name:</label>
-            <input type=text name="college-name" placeholder="Please type here..." required disabled>
+        <div class="form-group">
+            <label for="college-name">College Name:</label>
+            <input id="college-name" type="text" name="college-name" placeholder="Enter your college name" disabled>
         </div>
-        <button>Register</button>
+        <button type="submit">Register</button>
     </form>
+
     <script src="./events.js"></script>
 </body>
 
 </html>
+
+
