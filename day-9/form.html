@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FORM</title>
+    <link rel="stylesheet" href="./form.css">
+</head>
+
+<body>
+    <form onsubmit="handleSubmit(event)" action="./thank.html" method="GET">
+        <div>
+            <label>Name:</label>
+            <input type=text name="name" placeholder="Please type here..." required>
+        </div>
+        <div>
+            <label>Email:</label>
+            <input type=email name="email" placeholder="Please type here..." required>
+        </div>
+        <div>
+            <label>Password:</label>
+            <input type=password name="password" placeholder="Please type here..." required>
+        </div>
+        <div>
+            <label>Profession:</label>
+            <select onchange="handleSelectProfession(event)">
+                <option value="NA">---choose---</option>
+                <option value="std">Student</option>
+                <option value="emp">Employee in Tech</option>
+                <option value="bsn">Business</option>
+            </select>
+        </div>
+        <div>
+            <label>GST Number:</label>
+            <input type=text name="gst-number" placeholder="Please type here..." required disabled>
+        </div>
+        <div>
+            <label>Employee Email:</label>
+            <input type=email name="emp-email" placeholder="Please type here..." required disabled>
+        </div>
+        <div>
+            <label>College Name:</label>
+            <input type=text name="college-name" placeholder="Please type here..." required disabled>
+        </div>
+        <button>Register</button>
+    </form>
+    <script src="./events.js"></script>
+</body>
+
+</html>
