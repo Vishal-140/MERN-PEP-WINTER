@@ -1,4 +1,4 @@
-// The Promise object represents the eventual completion (or failure) of an asynchronous operation and its resulting value.
+// Promise ek JS object hai jo future mein hone wale kaam ka result batata hai. Ye kaam ya to successful hoga (complete hoga) ya fail karega.
 
 
 // FETCH is a PROMISE
