@@ -2,6 +2,11 @@
 // Agar Call Stack khali ho, toh woh Callback Queue se pehla task uthata hai 
 // aur Call Stack mein daal kar run karta hai
 
+// Event loop check
+// 1st: is there any pending task
+// 2nd: is the call stack is empty
+
+
 console.log("A-----start");
 
 function doSomething() {
