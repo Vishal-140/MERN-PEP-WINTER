@@ -1,0 +1,33 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: #212121;
+    color: white;
+}
+
+.task-page {
+    margin: 2rem;
+    padding: 2rem;
+    border: 2px solid lightgrey;
+    border-radius: 0.75rem;
+    background-color: royalblue;
+    color: #fdd02f;
+}
+
+.task-page span {
+    text-decoration: underline;
+    color: rgb(245, 227, 194);
+}
+
+.user-input {
+    padding: 0.7rem 1rem;
+    border: 2px solid rgb(242, 2, 18);
+    margin: 0.75rem;
+    font-size: 20px;
+    border-radius: 0.75rem;
+}
