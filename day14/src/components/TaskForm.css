@@ -1,0 +1,37 @@
+.task-form {
+    background-color: rgba(0, 255, 0, 0.574);
+    padding: 1.5rem;
+    margin: 1.5rem auto;
+    border-radius: 1rem;
+    max-width: 400px;
+}
+
+.task-form > h3 {
+    color: rgb(77, 77, 77);
+    
+}
+
+.form-input-container {
+    display: flex;
+    gap: 1rem;
+    border: 1px solid black;
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    margin: 1rem 0;
+}
+
+.form-input-container input, select{
+    padding: 5px;
+    border-radius: 10px;
+    border: 2px solid rgb(252, 2, 2);
+}
+
+
+.add-task {
+    padding: 10px;
+    color: white;
+    background-color: rgb(225, 121, 65);
+    border: 1px solid black;
+    border-radius: 5px;
+    margin-left: 40%;
+}

@@ -1,0 +1,12 @@
+.tasklist{
+    background-color: bisque;
+    color: black;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 5px;
+}
+
+.tasklist-title{
+    color: white;
+    font-size: 30px;
+}
