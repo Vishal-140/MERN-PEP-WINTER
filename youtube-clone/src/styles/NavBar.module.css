@@ -1,0 +1,44 @@
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    justify-content: space-between;
+    align-items: center;
+    display: flex;
+    padding: 10px 50px;
+    background-color: #121212;
+    color: white;
+    z-index: 1000;
+}
+
+
+.navleft img {
+    height: 50px;
+    width: 140px;
+}
+
+.navsearch input {
+    padding: 8px 240px;
+    background-color: #121212;
+    border: 1px solid gray;
+    border-radius: 20px;
+}
+
+.navright {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.navright > ul {
+    list-style: none;
+    gap: 30px;
+    display: flex;
+    flex-direction: row;
+}
+
+.navright > ul > li > a {
+    color: white;
+    text-decoration: none;
+}
