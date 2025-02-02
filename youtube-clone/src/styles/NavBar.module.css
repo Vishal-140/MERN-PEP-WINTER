@@ -15,14 +15,21 @@
 
 .navleft img {
     height: 50px;
-    width: 140px;
+    width: 130px;
 }
 
 .navsearch input {
-    padding: 8px 240px;
+    padding: 12px 240px;
     background-color: #121212;
     border: 1px solid gray;
     border-radius: 20px;
+}
+.navsearch i {
+    font-size: 24px;
+    padding: 8px;
+    background-color: #2D2D2D;
+    border-radius: 50%;
+    margin-left: 15px;
 }
 
 .navright {

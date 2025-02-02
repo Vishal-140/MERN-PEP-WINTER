@@ -1,7 +1,7 @@
 .sidebar {
-  padding: 80px 60px;
+  padding: 80px 20px 20px 20px;
   height: 100vh;
-  width: 150px;
+  width: 220px;
   background-color: #121212;
   display: flex;
   flex-direction: column;
@@ -19,43 +19,63 @@
 }
 
 .sidebar ul li {
-  margin: 15px 0;
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  gap: 12px;
+}
+
+.sidebar ul li i {
+  color: white;
+  font-size: 20px;
+  width: 30px;
+  text-align: left;
 }
 
 .sidebar ul li a {
   color: white;
   text-decoration: none;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 500;
-  display: block;
-  padding: 10px;
-  border-radius: 5px;
+  flex-grow: 1;
+  text-align: left;
 }
 
-.sidebar ul li a:hover {
-  background-color: #444;
+.sidebar ul li:hover {
+  background-color: #333;
+  border-radius: 8px;
 }
 
 .line {
   width: 100%;
   height: 1px;
   background-color: gray;
-  margin: 20px 0;
+  margin: 15px 0;
 }
 
 .subscription ul {
-  padding-left: 20px;
+  padding-left: 10px;
 }
 
 .subscription ul li {
-  margin: 10px 0;
+  display: flex;
+  align-items: center;
+  padding: 8px 10px;
+}
+
+.subscription ul li i {
+  font-size: 18px;
+  width: 30px;
+  text-align: left;
 }
 
 .subscription ul li a {
   font-size: 14px;
   font-weight: 400;
+  text-align: left;
 }
 
-.subscription ul li a:hover {
+.subscription ul li:hover {
   background-color: #333;
+  border-radius: 8px;
 }

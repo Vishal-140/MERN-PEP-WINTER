@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router'
 import styles from '../styles/NavBar.module.css'
-import ytLogo from '../assets/ytLogo.png'
+import ytLogo from '../assets/ytLog.webp'
 
 function NavBar() {
     return (
@@ -11,6 +11,7 @@ function NavBar() {
             </div>
             <div className={styles.navsearch}>
                 <input type="text" placeholder='Search' />
+                <i class="ri-mic-fill"></i>
             </div>
             <div className={styles.navright}>
                 <ul>
