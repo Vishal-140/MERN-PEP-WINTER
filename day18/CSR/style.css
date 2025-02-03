@@ -1,0 +1,24 @@
+body {
+    background-color: #212121;
+    padding: 1rem;
+    color: white;
+    font-family: Tahoma;
+    display: flex;
+    justify-content: center;
+}
+.card {
+    max-width: 400px;
+    background-color: royalblue;
+    color: white;
+    padding: 1rem;
+    border: 2px solid lightgrey;
+    border-radius: 1rem;
+    margin: 1rem auto;
+    
+}
+img {
+    height: 125px;
+    display: block;
+    width: fit-content;
+    margin: auto;
+}
