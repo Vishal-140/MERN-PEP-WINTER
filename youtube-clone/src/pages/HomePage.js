@@ -1,16 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react'
 import NavBar from '../components/NavBar'
 import Sidebar from '../components/Sidebar'
-import VideoContainer from '../components/VideoContainer'
 import styles from '../styles/HomePage.module.css'
+import SearchResults from './SearchResults';
 
 function HomePage() {
+    const [searchResults, setSearchResults] = useState([]);
+
     return (
         <div className={styles.homepage}>
-            <NavBar />
+            <NavBar onSearchResults={setSearchResults} />
             <div className={styles.content}>
                 <Sidebar />
-                <VideoContainer />
+                <SearchResults results={searchResults} />
             </div>
         </div>
     )

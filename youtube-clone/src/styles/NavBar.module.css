@@ -6,12 +6,11 @@
     justify-content: space-between;
     align-items: center;
     display: flex;
-    padding: 10px 50px;
+    padding: 5px 50px;
     background-color: #121212;
     color: white;
     z-index: 1000;
 }
-
 
 .navleft img {
     height: 50px;
@@ -21,9 +20,11 @@
 .navsearch input {
     padding: 12px 240px;
     background-color: #121212;
+    color: white;
     border: 1px solid gray;
     border-radius: 20px;
 }
+
 .navsearch i {
     font-size: 24px;
     padding: 8px;
@@ -38,14 +39,33 @@
     display: flex;
 }
 
-.navright > ul {
+.navright>ul {
+    justify-content: center;
+    align-items: center;
     list-style: none;
     gap: 30px;
     display: flex;
     flex-direction: row;
 }
 
-.navright > ul > li > a {
+.navright>ul>li>a {
     color: white;
     text-decoration: none;
+}
+
+.navright i {
+    color: white;
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    margin-right: 5px;
+}
+
+.navright ul li:first-child a {
+    display: flex;
+    background-color: #2D2D2D;
+    padding: 5px 10px;
+    border-radius: 50px;
+    font-size: 15px;
+    align-items: center;
 }
