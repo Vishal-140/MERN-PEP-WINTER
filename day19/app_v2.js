@@ -8,12 +8,11 @@ const app = express();
 // Middleware
 app.use(express.json());
 
-// GET - Default Route
+// READ
 app.get("/", (req, res) => {
     res.send(`<h1>Server is running on PORT ${PORT}</h1>`);
 });
 
-// GET - /tasks Route
 app.get("/tasks", async (req, res) => {
     try {
         const text = await fsPromises.readFile("./db.json");
@@ -34,7 +33,7 @@ app.get("/tasks", async (req, res) => {
 
 });
 
-// POST - /tasks Route
+// CREATE
 app.post("/tasks", async (req, res) => {
 
     try {
@@ -47,6 +46,16 @@ app.post("/tasks", async (req, res) => {
         // STEP-2. Read the current data from file
         const text = await fsPromises.readFile('./db.json', 'utf-8');
         const arr = JSON.parse(text);
+
+        // 2.1. Generate the unique ID
+        let newId = 1;
+        if (arr.length !== 0) {
+            const lastTask = arr[arr.length - 1];
+            newId = lastTask.id;
+            newId += 1;
+        }
+        // 2.2. Assign the ID
+        newObj.id = newId;
 
         // STEP-3. Append or push new data
         arr.push(newObj);
@@ -68,6 +77,62 @@ app.post("/tasks", async (req, res) => {
     }
 
 });
+
+// UPDATE
+app.patch('/tasks/:taskId', async (req, res) => {
+    try {
+        // Identification mark
+        const { taskId } = req.params;
+        const { id: tempId, ...updatedTaskInfo } = req.body;
+
+        // Read
+        const text = await fsPromises.readFile("./db.json", "utf-8");
+        const arr = JSON.parse(text);
+
+        // Find the data object and Update
+        const foundIndex = arr.findIndex((elem) => {
+            if (elem.id == taskId) {
+                return true;
+            }
+            return false;
+        });
+
+        if (foundIndex == -1) {
+            res.status(400);
+            res.json({
+                status: "fail",
+                message: "Invalid Task Id!",
+            });
+        } else {
+            // 4. Update the data
+            const oldTask = arr[foundIndex];
+            const finalNewTask = { ...oldTask, ...updatedTaskInfo };
+            arr[foundIndex] = finalNewTask;
+
+            // 5. save the update 
+            const textData = JSON.stringify(arr);
+            await fsPromises.writeFile("./db.json", textData);
+
+            res.status(200);
+            res.json({
+                status: "success",
+                data: {
+                    task: finalNewTask,
+                },
+            });
+        }
+
+
+    } catch (error) {
+        console.log('Error in PATCH task');
+        res.status(500);
+        res.json({
+            status: 'fail',
+            message: 'internal server error'
+        })
+
+    }
+})
 
 // listening
 app.listen(PORT, () => {
