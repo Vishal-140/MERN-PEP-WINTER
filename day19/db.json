@@ -3,28 +3,28 @@
         "taskTitle": "UI implementation",
         "workTitle": "Frontend",
         "assignee": "Vishal",
-        "priority": "LOW",
+        "priority": "HIGH",
         "id": 1
     },
     {
-        "taskTitle": "API implementation",
+        "taskTitle": "Backend implementation",
         "workTitle": "Backend",
-        "assignee": "Raj",
-        "priority": "High",
-        "id": 2
+        "assignee": "Mohit",
+        "priority": "HIGH",
+        "id": 4
     },
     {
-        "taskTitle": "Database implementation",
+        "taskTitle": "Database Handler",
         "workTitle": "Database",
-        "assignee": "Ankit",
-        "priority": "High",
-        "id": 3
+        "assignee": "Raj",
+        "priority": "normal",
+        "id": 4
     },
     {
         "taskTitle": "express app",
         "workTitle": "backend developement",
-        "assignee": "Mohit",
-        "priority": "normal",
+        "assignee": "Abhi",
+        "priority": "LOW",
         "id": 4
     }
 ]

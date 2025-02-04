@@ -8,7 +8,7 @@ const app = express();
 // Middleware
 app.use(express.json());
 
-// READ
+// READ - GET
 app.get("/", (req, res) => {
     res.send(`<h1>Server is running on PORT ${PORT}</h1>`);
 });
@@ -33,7 +33,7 @@ app.get("/tasks", async (req, res) => {
 
 });
 
-// CREATE
+// CREATE - POST
 app.post("/tasks", async (req, res) => {
 
     try {
@@ -42,6 +42,14 @@ app.post("/tasks", async (req, res) => {
         // STEP-1. Request the data
         const newObj = req.body;
         console.log('newObj', newObj);
+
+        if(newObj.assignee == undefined || newObj.assignee.length == 0){
+            res.status(400)
+            res.json({
+                status: "fail",
+                message: "assignee is required"
+            })
+        }
 
         // STEP-2. Read the current data from file
         const text = await fsPromises.readFile('./db.json', 'utf-8');
@@ -69,6 +77,9 @@ app.post("/tasks", async (req, res) => {
             status: "success",
         });
     } catch (error) {
+        console.log("error in POST task")
+        console.log(error.message)
+        
         res.status(500)
         res.json({
             status: "fail",
@@ -78,7 +89,7 @@ app.post("/tasks", async (req, res) => {
 
 });
 
-// UPDATE
+// UPDATE - PATCH
 app.patch('/tasks/:taskId', async (req, res) => {
     try {
         // Identification mark
@@ -122,7 +133,6 @@ app.patch('/tasks/:taskId', async (req, res) => {
             });
         }
 
-
     } catch (error) {
         console.log('Error in PATCH task');
         res.status(500);
@@ -132,6 +142,52 @@ app.patch('/tasks/:taskId', async (req, res) => {
         })
 
     }
+});
+
+// DELETE
+app.delete('/tasks/:taskId', async(req, res) => {
+    // 1. Get the data from the request -> taskId & params
+    // 2. Read the current list
+    // 3. Find the index of the element using taskId
+    // 4. Splice the data (if the task id is valid)
+    // 5. Store the updated array in the list
+    try {
+        const {taskId} = req.params;
+        const text = await fsPromises.readFile("./db.json", "utf-8");
+        const arr = JSON.parse(text);
+
+        const foundIndex = arr.findIndex((elem) => {
+            if(elem.id == taskId) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        });
+
+        if(foundIndex == -1) {
+            res.status(400);
+            res.json({
+                status: "fail",
+                message: "invalid task id",
+            });
+        } else {
+            // Delete
+            arr.splice(foundIndex, 1);
+
+            await fsPromises.writeFile("./db.json", JSON.stringify(arr));
+
+            res.status(204);
+            res.json({
+                status: "success",
+
+            })
+        }
+
+    } catch (error) {
+        console.log(error.message)
+    }
+    
 })
 
 // listening
