@@ -43,12 +43,16 @@ app.post("/tasks", async (req, res) => {
         const newObj = req.body;
         console.log('newObj', newObj);
 
-        if(newObj.assignee == undefined || newObj.assignee.length == 0){
+        if (newObj.assignee == undefined ||
+            newObj.assignee.length == 0 ||
+            newObj.taskTitle == undefined ||
+            newObj.taskTitle.length == 0) {
             res.status(400)
             res.json({
                 status: "fail",
-                message: "assignee is required"
+                message: "assignee & taskTitle is required"
             })
+            return;
         }
 
         // STEP-2. Read the current data from file
@@ -79,7 +83,7 @@ app.post("/tasks", async (req, res) => {
     } catch (error) {
         console.log("error in POST task")
         console.log(error.message)
-        
+
         res.status(500)
         res.json({
             status: "fail",
@@ -145,19 +149,20 @@ app.patch('/tasks/:taskId', async (req, res) => {
 });
 
 // DELETE
-app.delete('/tasks/:taskId', async(req, res) => {
+app.delete('/tasks/:taskId', async (req, res) => {
     // 1. Get the data from the request -> taskId & params
     // 2. Read the current list
     // 3. Find the index of the element using taskId
     // 4. Splice the data (if the task id is valid)
     // 5. Store the updated array in the list
     try {
-        const {taskId} = req.params;
+        // Read the data
+        const { taskId } = req.params;
         const text = await fsPromises.readFile("./db.json", "utf-8");
         const arr = JSON.parse(text);
 
         const foundIndex = arr.findIndex((elem) => {
-            if(elem.id == taskId) {
+            if (elem.id == taskId) {
                 return true;
             }
             else {
@@ -165,7 +170,7 @@ app.delete('/tasks/:taskId', async(req, res) => {
             }
         });
 
-        if(foundIndex == -1) {
+        if (foundIndex == -1) {
             res.status(400);
             res.json({
                 status: "fail",
@@ -186,8 +191,13 @@ app.delete('/tasks/:taskId', async(req, res) => {
 
     } catch (error) {
         console.log(error.message)
+        res.status(500);
+        res.json({
+            status: "internal server error",
+
+        })
     }
-    
+
 })
 
 // listening
