@@ -1,40 +1,62 @@
-form {
-    max-width: 400px;
-    margin: 20px auto;
-    padding: 20px;
-    background: beige;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+.task-form-container {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: #1e1e1e;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(255, 255, 255, 0.05);
 }
 
-div {
-    margin-bottom: 15px;
+.task-form-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
 }
 
-label {
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
     display: block;
-    font-weight: bold;
-    margin-bottom: 5px;
-    color: red;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #e0e0e0;
+    font-size: 0.95rem;
 }
 
-input, select {
+.form-group input,
+.form-group select {
     width: 100%;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
+    padding: 0.75rem;
+    border: 1px solid #444;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.2s ease;
+    background-color: #2e2e2e;
+    color: #ffffff;
 }
 
-button {
-    width: 100px;
-    padding: 10px;
-    background: green;
-    color: #fff;
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+
+.submit-button {
+    background-color: #3b82f6;
+    color: white;
+    padding: 0.75rem 1.5rem;
     border: none;
-    border-radius: 5px;
-    font-size: 16px;
+    border-radius: 8px;
+    font-weight: 600;
     cursor: pointer;
-    transition: 0.3s;
+    transition: background-color 0.2s ease;
+    width: auto;
+    align-self: flex-end;
 }
 
+.submit-button:hover {
+    background-color: #2563eb;
+}

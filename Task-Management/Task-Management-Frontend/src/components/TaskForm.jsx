@@ -1,35 +1,49 @@
-import './TaskForm.css'
+import { useState } from 'react';
+import './TaskForm.css';
 import PropTypes from "prop-types";
 
 const TaskForm = ({ getData }) => {
-    const addTask = async (obj) => {
-        const resp = await fetch("http://localhost:1010/tasks", {
-            method: "POST",
-            body: JSON.stringify(obj),
-            headers: {
-                "Content-Type": "application/json",
-            },
-        });
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
-        const respObj = await resp.json();
-        if (respObj == 'success') {
-            console.log("Success");
-            getData();
-        } else {
-            alert(respObj.message);
+    const addTask = async (obj) => {
+        try {
+            setIsSubmitting(true);
+            const resp = await fetch("http://localhost:1010/tasks", {
+                method: "POST",
+                body: JSON.stringify(obj),
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
+
+            const respObj = await resp.json();
+            if (respObj.status === 'success') {
+                getData();
+                // Reset form
+                document.querySelector('form').reset();
+            } else {
+                alert(respObj.message || 'Error adding task');
+            }
+        } catch (error) {
+            alert('Error adding task. Please try again.');
+        } finally {
+            setIsSubmitting(false);
         }
     };
 
     const handleAddTask = (e) => {
         e.preventDefault();
 
-        if (e.target.taskTitle.value.length > 0 && e.target.assignee.value.length > 0) {
+        const formData = new FormData(e.target);
+        const taskTitle = formData.get('taskTitle').trim();
+        const assignee = formData.get('assignee').trim();
 
+        if (taskTitle && assignee) {
             const dataObj = {
-                taskTitle: e.target.taskTitle.value,
-                assignee: e.target.assignee.value,
-                deadline: e.target.deadline.value,
-                priority: e.target.priority.value,
+                taskTitle,
+                assignee,
+                deadline: formData.get('deadline'),
+                priority: formData.get('priority'),
                 assignor: "Rahul",
             };
 
@@ -40,30 +54,62 @@ const TaskForm = ({ getData }) => {
     };
 
     return (
-        <div>
+        <div className="task-form-container">
+            <h3 className="form-title">Add New Task</h3>
             <form onSubmit={handleAddTask}>
-                <div>
-                    <label>Task Title</label>
-                    <input type="text" name="taskTitle" required />
+                <div className="form-group">
+                    <label htmlFor="taskTitle">Task Title</label>
+                    <input 
+                        type="text" 
+                        id="taskTitle"
+                        name="taskTitle" 
+                        placeholder="Enter task title"
+                        required 
+                    />
                 </div>
-                <div>
-                    <label>Assignee</label>
-                    <input type="text" name="assignee" required />
+                
+                <div className="form-group">
+                    <label htmlFor="assignee">Assignee</label>
+                    <input 
+                        type="text" 
+                        id="assignee"
+                        name="assignee" 
+                        placeholder="Enter assignee name"
+                        required 
+                    />
                 </div>
-                <div>
-                    <label>Deadline</label>
-                    <input type="date" name="deadline" />
+                
+                <div className="form-group">
+                    <label htmlFor="deadline">Deadline</label>
+                    <input 
+                        type="date" 
+                        id="deadline"
+                        name="deadline" 
+                        min={new Date().toISOString().split('T')[0]}
+                    />
                 </div>
-                <div>
-                    <label>Priority</label>
-                    <select name="priority">
+                
+                <div className="form-group">
+                    <label htmlFor="priority">Priority</label>
+                    <select 
+                        id="priority"
+                        name="priority" 
+                        defaultValue="normal"
+                    >
                         <option value="normal">Normal</option>
                         <option value="low">Low</option>
                         <option value="high">High</option>
                         <option value="urgent">Urgent</option>
                     </select>
                 </div>
-                <button type="submit">Add Task</button>
+                
+                <button 
+                    type="submit" 
+                    className="submit-button"
+                    disabled={isSubmitting}
+                >
+                    {isSubmitting ? 'Adding Task...' : 'Add Task'}
+                </button>
             </form>
         </div>
     );
