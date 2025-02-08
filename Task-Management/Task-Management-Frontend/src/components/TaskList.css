@@ -74,6 +74,17 @@
     background-color: #2563eb;
 }
 
+.delete-button {
+    background-color: #ef4444;
+    margin-left: 22px;
+    color: white;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
 .cancel-button {
     background-color: #ef4444;
     color: white;

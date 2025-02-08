@@ -1,8 +1,15 @@
 const mongoose = require("mongoose");
+require("dotenv").config();
+
+const MONGO_DB_URL = process.env.MONGO_DB_URL;
+const MONGO_DB_PASSWORD = process.env.MONGO_DB_PASSWORD;
+const MONGO_DB_DATABASE_NAME = process.env.MONGO_DB_DATABASE_NAME;
+
+const MONGO_DB_CONNECT_URL = MONGO_DB_URL.replace("<db_password>", MONGO_DB_PASSWORD);
 
 const connectToDb = async () => {
     try {
-        await mongoose.connect("mongodb+srv://vkc140:vishal140@cluster0.bgvvc.mongodb.net/MERN_WINTER_PEP_TASK_MANAGEMENT?retryWrites=true&w=majority&appName=Cluster0");
+        await mongoose.connect(MONGO_DB_CONNECT_URL);
 
         console.log("--------  Connected to Database Successfully  -------");
 

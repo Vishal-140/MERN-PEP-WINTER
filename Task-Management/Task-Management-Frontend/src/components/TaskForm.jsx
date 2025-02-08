@@ -25,7 +25,7 @@ const TaskForm = ({ getData }) => {
                 alert(respObj.message || 'Error adding task');
             }
         } catch (error) {
-            alert('Error adding task. Please try again.');
+            alert('Error adding task. Please try again.', error);
         } finally {
             setIsSubmitting(false);
         }

@@ -28,7 +28,15 @@ app.get("/", (req, res) => {
 
 app.get("/tasks", async (req, res) => {
     try {
-        const tasks = await Task.find();
+        const queryObj = req.query;
+        // console.log(queryObj);
+
+        const tasksQuery =  Task.find();
+        if(queryObj.priority) {
+            tasksQuery.where("priority").equals(queryObj.priority);
+        
+        }
+        const tasks = await tasksQuery;
         res.status(200).json({
             status: "success",
             data: {

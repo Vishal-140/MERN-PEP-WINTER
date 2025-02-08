@@ -2,7 +2,7 @@ import { useState } from 'react';
 import './TaskList.css';
 import PropTypes from "prop-types";
 
-function TaskList({ list }) {
+function TaskList({ list, getData }) {
     const [editTask, setEditTask] = useState(-1);
     const [editObject, setEditObject] = useState({});
 
@@ -11,6 +11,19 @@ function TaskList({ list }) {
             ...prev,
             [key]: value
         }));
+    };
+
+    const handleDelete = async (taskId) => {
+        const resp = await fetch(`http://localhost:1010/tasks/${taskId}`, {
+            method: "DELETE",
+        });
+
+        const respObj = await resp.json();
+        if (respObj.status === "success") {
+            console.log("success :: deleted");
+        } else {
+            alert(respObj.message);
+        }
     };
 
     const handleEditData = async () => {
@@ -26,11 +39,12 @@ function TaskList({ list }) {
             if (respObj.status === "success") {
                 setEditTask(-1);
                 setEditObject({});
+                getData();
             } else {
                 alert(respObj.message);
             }
         } catch (error) {
-            alert("Error updating task");
+            alert("Error updating task", error);
         }
     };
 
@@ -49,7 +63,7 @@ function TaskList({ list }) {
                 {list.map((elem, index) => (
                     <div key={elem._id || index} className="task-card">
                         <h3>Task No. {index + 1}</h3>
-                        
+
                         {elem.workTitle && <p><strong>Work Title:</strong> {elem.workTitle}</p>}
                         <p><strong>Task:</strong> {elem.taskTitle}</p>
 
@@ -113,15 +127,22 @@ function TaskList({ list }) {
                                 </button>
                             </div>
                         ) : (
-                            <button
-                                className="edit-button"
-                                onClick={() => {
-                                    setEditObject(elem);
-                                    setEditTask(index);
-                                }}
-                            >
-                                Edit
-                            </button>
+                            <>
+                                <button
+                                    className="edit-button"
+                                    onClick={() => {
+                                        setEditObject(elem);
+                                        setEditTask(index);
+                                    }}
+                                >
+                                    Edit
+                                </button>
+
+                                <button
+                                    className="delete-button"
+                                    onClick={() => handleDelete(elem._id)}>Delete
+                                </button>
+                            </>
                         )}
                     </div>
                 ))}
@@ -132,6 +153,7 @@ function TaskList({ list }) {
 
 TaskList.propTypes = {
     list: PropTypes.array.isRequired,
+    getData: PropTypes.func,
 };
 
 export default TaskList;
